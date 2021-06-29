@@ -1,380 +1,834 @@
-<html lang="en"><head>
-	<meta charset="UTF-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Document</title>
-	<link rel="stylesheet" href="styles.css">
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>COVID_supplies_Dashboard_AP</title>
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+        integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
+
+
+    <link rel="shortcut icon" href="img/favicon.webp" type="image/x-icon">
+    <link rel="stylesheet" href="css/styles.css">
+    <script src="js/script.js" defer></script>
 </head>
+
 <body class="flex-cc col">
-	
-	<section class="flex-cc col" id="vaccCentreTabContainer">
-		<h3 class="flex-cc">
-			Vaccination Centres in - <span class="flex-cc"> Ananthapur </span>
-		</h3>
-		<div id="vaccCentreTabWrapper">
-			<div class="filters flex-cc">
-				<ul class="flex-cc noBullets">
-					<li><label>Covaxin</label></li>
-					<li><label>Covishield</label></li>
-					<li><label>Sputnik V</label></li>
-					<li><label>Age 18+</label></li>
-					<li><label>Age 45+</label></li>
-					<li><label>Paid</label></li>
-					<li><label>Free</label></li>
-				</ul>
-				<button class="filterBtn" id="hspFilterBtn">Filter</button>
-			</div>
-			<div id="vaccCentreData" class="flex-cc col">
-				<div class="vaccCentreItem card flex-cc">
-					<div class="vaccCentreDetails">
-						<ul class="flex-cc col noBullets">
-							<li class="vcNameLi flex-cc">
-								<h4>Government Hospital</h4>
-							</li>
-							<li class="vcChargesLi">
-								<span class="free">Free</span>
-								<span class="vacc">COVAXIN</span>
-								<span class="age">Age 18+</span>
-							</li>
-							<li class="vcPhoneLi">
-								<ul class="flex-cc noBullets phoneUl">
-									<li><a href="#">08554 220220</a></li>
-									<li class="vertLine"></li>
-									<li><a href="#">9849771947</a></li>
-								</ul>
-							</li>
-							<li class="vcAddressLi">Subash Rd, Adimurthy Nagar, Gulzarpet, Anantapur, Andhra Pradesh 515001, India</li>
-						</ul>
-					</div>
-					<div class="vaccData flex-cc col">
-						<table class="vaccDataTable">
-							<thead>
-								<th>Age Grp.</th>
-								<th>DOSE</th>
-								<th>COVAX</th>
-								<th>COVSHLD</th>
-								<th>SPTNK V</th>
-							</thead>
-							<tbody>
-								<tr class="wrap18">
-									<th rowspan="2">Age 18+</th>
-									<td>D1</td>
-									<td>
-										<span class="booked">Booked</span>
-									</td>
-									<td>
-										<span class="na">NA</span>
-									</td>
-									<td>
-										<span class="na">NA</span>
-									</td>
-								</tr>
-								<tr class="wrap18">
-									<td>D2</td>
-									<td>
-										<span class="booked">Booked</span>
-									</td>
-									<td>
-										<span class="booked">Booked</span>
-									</td>
-									<td>
-										<span class="na">NA</span>
-									</td>
-								</tr>
-								<tr class="wrap45">
-									<th rowspan="2">Age 45+</th>
-									<td>D1</td>
-									<td>
-										<span class="na">NA</span>
-									</td>
-									<td>
-										<span class="booked">Booked</span>
-									</td>
-									<td>
-										<span class="na">NA</span>
-									</td>
-								</tr>
-								<tr class="wrap45">
-									<td>D2</td>
-									<td>
-										<span class="booked">Booked</span>
-									</td>
-									<td>
-										<span class="na">NA</span>
-									</td>
-									<td>
-										<span class="na">NA</span>
-									</td>
-								</tr>
-							</tbody>
-						</table>
-					</div>
-				</div>
-			</div>
+    <header class="flex-cc">
+        <a id="logo" href="#" tabindex="0">
+            <h1 class="flex-cc">
+                <span id="logo1" class="flex-cc col">
+                    <span id="covid">COVID</span>
+                    <span class="flex-cc" id="helpDesk">HELP DESK</span>
+                </span>
+                <span id="ap">AP</span>
+            </h1>
+        </a>
+        <button id="menu" class="flex-cc">
+            <svg width="40" height="32" viewBox="0 0 100 100" version="1.1" xmlns="http://www.w3.org/2000/svg"
+                xmlns:xlink="http://www.w3.org/1999/xlink">
+                <g stroke="none" stroke-width="0">
+                    <rect id="rect1" x="8" y="25" width="84" height="10" rx="5" ry="5" />
+                    <rect id="rect2" x="8" y="45" width="84" height="10" rx="5" ry="5" />
+                    <rect id="rect3" x="8" y="65" width="84" height="10" rx="5" ry="5" />
+                </g>
+            </svg>
+        </button>
+        <nav id="nav_el" class="flex-cc">
+            <ul class="flex-cc noBullets">
+                <li>
+                    <a href="precautions.html">
+                        Precautions
+                        <span class="material-icons">open_in_new</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#searchSection">
+                        Search
+                        <span class="material-icons">search</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#resTabWrapper">
+                        Results
+                        <span class="material-icons">list_alt</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+    <!------------- Hanuma ----------------->
 
-			<div id="vaccCentreData" class="flex-cc col">
-				<div class="vaccCentreItem card flex-cc">
-					<div class="vaccCentreDetails">
-						<ul class="flex-cc col noBullets">
-							<li class="vcNameLi flex-cc">
-								<h4>Medicover Hospital</h4>
-							</li>
-							<li class="vcChargesLi">
-								<span class="paid">Paid</span>
-								<span class="vacc">COVAXIN</span>
-								<span class="age">Age 45+</span>
-							</li>
-							<li class="vcPhoneLi">
-								<ul class="flex-cc noBullets phoneUl">
-									<li><a href="#">09554 200220</a></li>
-									<li class="vertLine"></li>
-									<li><a href="#">7780124053</a></li>
-								</ul>
-							</li>
-							<li class="vcAddressLi">Tadipatri Rd, Vasavi Nagar, Shaikpet, Anantapur, Andhra Pradesh 5150101, India</li>
-						</ul>
-					</div>
-					<div class="vaccData flex-cc col">
-						<table class="vaccDataTable">
-							<thead>
-								<th>Age Grp.</th>
-								<th>DOSE</th>
-								<th>COVAX</th>
-								<th>COVSHLD</th>
-								<th>SPTNK V</th>
-							</thead>
-							<tbody>
-								<tr class="wrap18">
-									<th rowspan="2">Age 18+</th>
-									<td>D1</td>
-									<td>
-										<span class="booked">Booked</span>
-									</td>
-									<td>
-										<span class="na">NA</span>
-									</td>
-									<td>
-										<span class="na">NA</span>
-									</td>
-								</tr>
-								<tr class="wrap18">
-									<td>D2</td>
-									<td>
-										<span class="na">NA</span>
-									</td>
-									<td>
-										<span class="booked">Booked</span>
-									</td>
-									<td>
-										<span class="na">NA</span>
-									</td>
-								</tr>
-								<tr class="wrap45">
-									<th rowspan="2">Age 45+</th>
-									<td>D1</td>
-									<td>
-										<span class="na">NA</span>
-									</td>
-									<td>
-										<span class="booked">Booked</span>
-									</td>
-									<td>
-										<span class="na">NA</span>
-									</td>
-								</tr>
-								<tr class="wrap45">
-									<td>D2</td>
-									<td>
-										<span class="na">NA</span>
-									</td>
-									<td>
-										<span class="booked">Booked</span>
-									</td>
-									<td>
-										<span class="na">NA</span>
-									</td>
-								</tr>
-							</tbody>
-						</table>
-					</div>
-				</div>
-			</div>
-			<div id="vaccCentreData" class="flex-cc col">
-				<div class="vaccCentreItem card flex-cc">
-					<div class="vaccCentreDetails">
-						<ul class="flex-cc col noBullets">
-							<li class="vcNameLi flex-cc">
-								<h4>Omni Hospital</h4>
-							</li>
-							<li class="vcChargesLi">
-								<span class="paid">Paid</span>
-								<span class="vacc">COVAXIN</span>
-								<span class="age">Age 45+</span>
-							</li>
-							<li class="vcPhoneLi">
-								<ul class="flex-cc noBullets phoneUl">
-									<li><a href="#">09000 200220</a></li>
-									<li class="vertLine"></li>
-									<li><a href="#">6700124053</a></li>
-								</ul>
-							</li>
-							<li class="vcAddressLi">Jntua College Rd, Saibaba Nagar, Keshavpet, Anantapur, Andhra Pradesh 5850001, India</li>
-						</ul>
-					</div>
-					<div class="vaccData flex-cc col">
-						<table class="vaccDataTable">
-							<thead>
-								<th>Age Grp.</th>
-								<th>DOSE</th>
-								<th>COVAX</th>
-								<th>COVSHLD</th>
-								<th>SPTNK V</th>
-							</thead>
-							<tbody>
-								<tr class="wrap18">
-									<th rowspan="2">Age 18+</th>
-									<td>D1</td>
-									<td>
-										<span class="na">NA</span>
-									</td>
-									<td>
-										<span class="na">NA</span>
-									</td>
-									<td>
-										<span class="booked">Booked</span>
-									</td>
-								</tr>
-								<tr class="wrap18">
-									<td>D2</td>
-									<td>
-										<span class="na">NA</span>
-									</td>
-									<td>
-										<span class="na">NA</span>
-									</td>
-									<td>
-										<span class="na">NA</span>
-									</td>
-								</tr>
-								<tr class="wrap45">
-									<th rowspan="2">Age 45+</th>
-									<td>D1</td>
-									<td>
-										<span class="booked">Booked</span>
-									</td>
-									<td>
-										<span class="booked">Booked</span>
-									</td>
-									<td>
-										<span class="na">NA</span>
-									</td>
-								</tr>
-								<tr class="wrap45">
-									<td>D2</td>
-									<td>
-										<span class="na">NA</span>
-									</td>
-									<td>
-										<span class="booked">Booked</span>
-									</td>
-									<td>
-										<span class="na">NA</span>
-									</td>
-								</tr>
-							</tbody>
-						</table>
-					</div>
-				</div>
-			</div>
-			<div id="vaccCentreData" class="flex-cc col">
-				<div class="vaccCentreItem card flex-cc">
-					<div class="vaccCentreDetails">
-						<ul class="flex-cc col noBullets">
-							<li class="vcNameLi flex-cc">
-								<h4>Vinayaka Hospital</h4>
-							</li>
-							<li class="vcChargesLi">
-								<span class="paid">Paid</span>
-								<span class="vacc">COVISHIELD</span>
-								<span class="age">Age 18+</span>
-							</li>
-							<li class="vcPhoneLi">
-								<ul class="flex-cc noBullets phoneUl">
-									<li><a href="#">06054 200220</a></li>
-									<li class="vertLine"></li>
-									<li><a href="#">6780124053</a></li>
-								</ul>
-							</li>
-							<li class="vcAddressLi">Rudravaram Rd, Srinivasa Nagar, Dhoolpet, Anantapur, Andhra Pradesh 5350101, India</li>
-						</ul>
-					</div>
-					<div class="vaccData flex-cc col">
-						<table class="vaccDataTable">
-							<thead>
-								<th>Age Grp.</th>
-								<th>DOSE</th>
-								<th>COVAX</th>
-								<th>COVSHLD</th>
-								<th>SPTNK V</th>
-							</thead>
-							<tbody>
-								<tr class="wrap18">
-									<th rowspan="2">Age 18+</th>
-									<td>D1</td>
-									<td>
-										<span class="booked">Booked</span>
-									</td>
-									<td>
-										<span class="na">NA</span>
-									</td>
-									<td>
-										<span class="na">NA</span>
-									</td>
-								</tr>
-								<tr class="wrap18">
-									<td>D2</td>
-									<td>
-										<span class="na">NA</span>
-									</td>
-									<td>
-										<span class="booked">Booked</span>
-									</td>
-									<td>
-										<span class="booked">Booked</span>
-									</td>
-								</tr>
-								<tr class="wrap45">
-									<th rowspan="2">Age 45+</th>
-									<td>D1</td>
-									<td>
-										<span class="na">NA</span>
-									</td>
-									<td>
-										<span class="booked">Booked</span>
-									</td>
-									<td>
-										<span class="na">NA</span>
-									</td>
-								</tr>
-								<tr class="wrap45">
-									<td>D2</td>
-									<td>
-										<span class="booked">Booked</span>
-									</td>
-									<td>
-										<span class="booked">Booked</span>
-									</td>
-									<td>
-										<span class="booked">Booked</span>
-									</td>
-								</tr>
-							</tbody>
-						</table>
-					</div>
-				</div>
-			</div>
-		</div>
+    <section id="searchSection" class="flex-cc col">
+        <div id="searchWrapper" class="flex-cc col">
+            <div class="flex-cc" id="selectWrapper">
+                <select name="districtSelect" id="distSel">
+                    <option disabled selected>Select your district</option>
+                    <option value="Anantapur">Anantapur</option>
+                    <option value="Chittoor">Chittoor</option>
+                    <option value="East godavari">East Godavari</option>
+                    <option value="Guntur">Guntur</option>
+                    <option value="Krishna">Krishna</option>
+                    <option value="Kurnool">Kurnool</option>
+                    <option value="Prakasam">Prakasam</option>
+                    <option value="Spsr nellore">Spsr Nellore</option>
+                    <option value="Srikakulam">Srikakulam</option>
+                    <option value="Visakhapatanam">Visakhapatanam</option>
+                    <option value="Vizianagaram">Vizianagaram</option>
+                    <option value="West godavari">West Godavari</option>
+                    <option value="Y.s.r.">YSR District, Kadapa</option>
+                </select>
+                <span class="flex-cc">OR</span>
+                <button id="locateMeBtn" class="flex-cc">
+                    <span>Locate Me</span>
+                    <span class="material-icons">my_location</span>
+                </button>
+            </div>
+            <div class="flex-cc col" id="typeChkWrapper">
+                <span class="flex-cc">Search near by</span>
+                <div class="flex-cc">
+                    <label>
+                        <input type="checkbox" name="medChk">
+                        Medical Stores
+                    </label>
+                    <label>
+                        <input type="checkbox" name="hspChk">
+                        Hospitals
+                    </label>
+                    <label>
+                        <input type="checkbox" name="vaccChk">
+                        Vaccination Centres
+                    </label>
+                </div>
+            </div>
+            <button id="searchBtn">SEARCH</button>
+        </div>
+        <div id="disclaimer" class="flex-cc">
+            <span class="material-icons icon">warning</span>
+            <span>
+                <strong>Disclaimer</strong>: The data available on this site is not our own. We collect the data from different sites and services. The data we get is usually updated on a daily basis. For any queries or suggestions, contact us <a href="#footerNav">here</a>.
+            </span>
+        </div>
+    </section>
 
-	</section>
-	
-</body></html>
+    <div id="resTabWrapper" class="tabBtnWrapper flex-cc">
+
+        <div class="flex-cc">
+            <label class="tabBtn flex-cc active" data-targetelem="medStoreTabContainer" >
+                <input type="checkbox">
+                <!-- <i class="fas fa-prescription-bottle"></i> -->
+                <!-- <i class="fas fa-prescription-bottle-alt icon"></i> -->
+                <span class="material-icons">medication</span>
+                Medical Stores
+            </label>
+            <label class="tabBtn flex-cc" data-targetelem="hospitalTabContainer" >
+                <input type="checkbox">
+                <span class="material-icons icon">local_hospital</span>
+                Hospitals
+            </label>
+            <label class="tabBtn flex-cc" data-targetelem="vaccCentreTabContainer" >
+                <input type="checkbox">
+                <span class="material-icons icon">vaccines</span>
+                Vaccination Centers
+            </label>
+        </div>
+
+    </div>
+    
+    <section id="resultSection" class="flex-cc col">
+        
+
+        <div class="tabContentWrapper flex-cc">
+
+            <!------------- Gayatri ---------------->
+            <section id="medStoreTabContainer" class="flex-cc col">
+                <div class="medStoreWrapper">
+                    <div class="medcontainer">
+                        <div class="storecontainerL">
+                            <img src="img/pharmacy.jpg" alt="">
+                        </div>
+                        <div class="storecontainerR">
+                            <h1>APOLLO PHARMACY</h1>
+                            <h3>OPEN NOW</h3>
+                            <p>Opp. XYZ University,Camp Road,Nellore,Andhra Pradesh- 524004</p>
+                            <span> Call</span>
+                            <img src="img/phone.svg" alt="">
+                            <span>Location</span>
+                            <img src="img/location.png" alt="">
+                            <span>Working Hours</span>
+                            <img src="img/clock-2.svg" alt="">
+                            <div class="text-center btn-wrapper">
+                                <button class="btn btn-secondary">Directions</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="medcontainer">
+                        <div class="storecontainerL">
+                            <img src="img/newgen.jpg" alt="">
+                        </div>
+                        <div class="storecontainerR">
+                            <h1>NEWGEN PHARMACY</h1>
+                            <h3>OPEN NOW</h3>
+                            <p>Opp. XYZ University,Camp Road,Nellore,Andhra Pradesh- 524004</p>
+                            <span> Call</span>
+                            <img src="img/phone.svg" alt="">
+                            <span>Location</span>
+                            <img src="img/location.png" alt="">
+                            <span>Working Hours</span>
+                            <img src="img/clock-2.svg" alt="">
+                            <div class="text-center btn-wrapper">
+                                <button class="btn btn-secondary">Directions</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="medcontainer">
+                        <div class="storecontainerL">
+                            <img src="img/store.jpg" alt="">
+                        </div>
+                        <div class="storecontainerR">
+                            <h1>SRI PHARMACY</h1>
+                            <h3>OPEN NOW</h3>
+                            <p>Opp. XYZ University,Camp Road,Nellore,Andhra Pradesh- 524004</p>
+                            <span> Call</span>
+                            <img src="img/phone.svg" alt="">
+                            <span>Location</span>
+                            <img src="img/location.png" alt="">
+                            <span>Working Hours</span>
+                            <img src="img/clock-2.svg" alt="">
+                            <div class="text-center btn-wrappert">
+                                <button class="directions">Directions</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="medcontainer">
+                        <div class="storecontainerL">
+                            <img src="img/med_store.jpg" alt="">
+                        </div>
+                        <div class="storecontainerR">
+                            <h1>SARASWATHI MEDICALS</h1>
+                            <h3>OPEN NOW</h3>
+                            <p>Opp. XYZ University,Camp Road,Nellore,Andhra Pradesh- 524004</p>
+                            <span> Call</span>
+                            <img src="img/phone.svg" alt="">
+                            <span>Location</span>
+                            <img src="img/location.png" alt="">
+                            <span>Working Hours</span>
+                            <img src="img/clock-2.svg" alt="">
+                            <div class="text-center btn-wrapper">
+                                <button class="btn btn-secondary">Directions</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="text-center btn-wrapper">
+                    <button class="btn btn-secondary">View More</button>
+                </div>
+            </section>
+
+                <!------------- Siva ------------------->
+            <!-- Total Hospitals  -->
+            <section id="hospitalTabContainer">
+                <div class="container flex-cc col">
+                    <h3 class="Hsptl_list_name">
+                        <u>Hospitals in - <label>Visakhapatnam</label></u>
+                    </h3>
+                    <table class="total_hospitals_list">
+                        <thead>
+                            <th>Total Hospitals</th>
+                            <th>Regular Beds</th>
+                            <th>Oxygen Beds</th>
+                            <th>ICU Beds</th>
+                            <th>Ventilator Beds</th>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>15</td>
+                                <td>100</td>
+                                <td>30</td>
+                                <td>25</td>
+                                <td>20</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    
+                    <!-- filters -->
+                    <form class="frm_filtr">
+                
+                            <select name="Select Beds" id="Slct_Beds">
+                                <option value="">
+                                    Regular Beds
+                                </option>
+                                <option value="">
+                                Oxygen Beds
+                                </option>
+                                <option value="">
+                                    ICU Beds
+                                </option>
+                                <option value="">
+                                    Ventilator Beds
+                                </option>
+                            </select>                                   
+                                
+                        
+                        
+                            <select name="Type" id="Hsp_type">
+                                <option value="Private">Private</option>
+                                <option value="Government">Government</option>
+                                <option value="Arogyashree">Arogyashree</option>
+                            </select>
+                        <input type="text" placeholder="Hospital Name.." name="search" class="sbt_btn">
+                        <button type="submit">Submit</button>
+                        
+                        <div class="clr_fix"></div>
+                    </form>
+                
+                    <!-- Hospital availability list  -->
+                   <div id="hospitalData" class="flex-cc col">
+				<div class="hospitalItem card flex-cc">
+				<div class="hospitalDetails">
+					<ul class="flex-cc col noBullets">
+						<li class="hspNameLi flex-cc">
+							<h4>RK Hospital</h4>
+							<a class="hspDetailsLink" href="https://www.google.com/search?q=rk+hospital+visakhapatnam&newwindow=1&safe=active&rlz=1C1NDCM_enIN870IN870&tbm=lcl&sxsrf=ALeKk031sdxCL0Rwp8wlR5vGEXVtb2pM-Q%3A1624946054051&ei=hrXaYODEAuiO4-EPirSbuAs&oq=rk+hospital+visa&gs_l=psy-ab.3.0.0j0i67k1j0i22i30k1l6.1217929.1224082.0.1224967.8.8.0.0.0.0.244.1364.0j7j1.8.0....0...1c.1.64.psy-ab..0.8.1363...35i39k1j0i273k1j0i433i131k1j0i263i433i20k1j0i263i433i131i20k1j35i457i39k1j0i402k1j0i433i67k1j0i433k1j0i433i131i67k1.0.GVxzB9qYYrs" title="open in maps" target="-blank" rel="noreferrer noopener">Open in maps</a>
+						</li>
+						<li class="hspChargesLi">Partially Empanelled</li>
+						<li class="hspPhoneLi">
+							<ul class="flex-cc noBullets phoneUl">
+								<li><a href="#">0891 232323</a></li>
+								<li class="vertLine"></li>
+								<li><a href="#">93484 23777</a></li>
+							</ul>
+						</li>
+						<li class="hspAddressLi">Gajuwaka, Visakhapatanam, Andhra Pradesh 530026, India</li>
+					</ul>
+				</div>
+				<div class="bedData flex-cc col">
+					<ul class="flex-cc noBullets">
+						<li>Without Oxygen</li>
+						<li>With Oxygen</li>
+						<li>ICU</li>
+						<li>ICU with Ventilator</li>
+					</ul>
+					<ul class="flex-cc noBullets">
+						<li><span>10</span>/<span>10</span></li>
+						<li><span>0</span>/<span>8</span></li>
+						<li><span>0</span>/<span>0</span></li>
+						<li><span>0</span>/<span>0</span></li>
+					</ul>
+				</div>
+			</div><div class="hospitalItem card flex-cc">
+				<div class="hospitalDetails">
+					<ul class="flex-cc col noBullets">
+						<li class="hspNameLi flex-cc">
+							<h4>Kranthi Hospital</h4>
+							<a class="hspDetailsLink" href="https://www.google.com/maps/search/?api=1&amp;query=Kranthi Hospital, Ramachandra Nagar, Anantapur, Andhra Pradesh 515001, India" title="open in maps" target="-blank" rel="noreferrer noopener">Open in maps</a>
+						</li>
+						<li class="hspChargesLi">Private</li>
+						<li class="hspPhoneLi">
+							<ul class="flex-cc noBullets phoneUl">
+								<li><a href="#">08554-221414</a></li>
+								<li class="vertLine"></li>
+								<li><a href="#">9884182449</a></li>
+							</ul>
+						</li>
+						<li class="hspAddressLi">Ramachandra Nagar, Anantapur, Andhra Pradesh 515001, India</li>
+					</ul>
+				</div>
+				<div class="bedData flex-cc col">
+					<ul class="flex-cc noBullets">
+						<li>Without Oxygen</li>
+						<li>With Oxygen</li>
+						<li>ICU</li>
+						<li>ICU with Ventilator</li>
+					</ul>
+					<ul class="flex-cc noBullets">
+						<li><span>3</span>/<span>3</span></li>
+						<li><span>0</span>/<span>2</span></li>
+						<li><span>0</span>/<span>0</span></li>
+						<li><span>0</span>/<span>0</span></li>
+					</ul>
+				</div>
+			</div><div class="hospitalItem card flex-cc">
+				<div class="hospitalDetails">
+					<ul class="flex-cc col noBullets">
+						<li class="hspNameLi flex-cc">
+							<h4>Amaravathi Multi Speciality Hospital</h4>
+							<a class="hspDetailsLink" href="https://www.google.com/maps/search/?api=1&amp;query=Amaravathi Multi Speciality Hospital, 11-1-234, Aravind Nagar, 3rd Cross Road Govt Hospital Road, Near Satya Sai Bajana Mandiram, Old TDP office, Aravinda Nagar, Maruthi Nagar, Anantapur, Andhra Pradesh 515001, India" title="open in maps" target="-blank" rel="noreferrer noopener">Open in maps</a>
+						</li>
+						<li class="hspChargesLi">Partially Empanelled</li>
+						<li class="hspPhoneLi">
+							<ul class="flex-cc noBullets phoneUl">
+								<li><a href="#">7207436153</a></li>
+								<li class="vertLine"></li>
+								<li><a href="#">9550845863</a></li>
+							</ul>
+						</li>
+						<li class="hspAddressLi">11-1-234, Aravind Nagar, 3rd Cross Road Govt Hospital Road, Near Satya Sai Bajana Mandiram, Old TDP office, Aravinda Nagar, Maruthi Nagar, Anantapur, Andhra Pradesh 515001, India</li>
+					</ul>
+				</div>
+				<div class="bedData flex-cc col">
+					<ul class="flex-cc noBullets">
+						<li>Without Oxygen</li>
+						<li>With Oxygen</li>
+						<li>ICU</li>
+						<li>ICU with Ventilator</li>
+					</ul>
+					<ul class="flex-cc noBullets">
+						<li><span>2</span>/<span>7</span></li>
+						<li><span>0</span>/<span>13</span></li>
+						<li><span>0</span>/<span>0</span></li>
+						<li><span>0</span>/<span>0</span></li>
+					</ul>
+				</div>
+			</div><div class="hospitalItem card flex-cc">
+				<div class="hospitalDetails">
+					<ul class="flex-cc col noBullets">
+						<li class="hspNameLi flex-cc">
+							<h4>Harshitha Multispeciality Hospital</h4>
+							<a class="hspDetailsLink" href="https://www.google.com/maps/search/?api=1&amp;query=Harshitha Multispeciality Hospital, #6-3-984, 1st Cross Rd, Maruthi Nagar, Anantapur, Andhra Pradesh 515002, India" title="open in maps" target="-blank" rel="noreferrer noopener">Open in maps</a>
+						</li>
+						<li class="hspChargesLi">Private</li>
+						<li class="hspPhoneLi">
+							<ul class="flex-cc noBullets phoneUl">
+								<li><a href="#">08554243422</a></li>
+								<li class="vertLine"></li>
+								<li><a href="#">8333991253</a></li>
+							</ul>
+						</li>
+						<li class="hspAddressLi">#6-3-984, 1st Cross Rd, Maruthi Nagar, Anantapur, Andhra Pradesh 515002, India</li>
+					</ul>
+				</div>
+				<div class="bedData flex-cc col">
+					<ul class="flex-cc noBullets">
+						<li>Without Oxygen</li>
+						<li>With Oxygen</li>
+						<li>ICU</li>
+						<li>ICU with Ventilator</li>
+					</ul>
+					<ul class="flex-cc noBullets">
+						<li><span>13</span>/<span>13</span></li>
+						<li><span>15</span>/<span>17</span></li>
+						<li><span>0</span>/<span>12</span></li>
+						<li><span>0</span>/<span>0</span></li>
+					</ul>
+				</div>
+			</div><div class="hospitalItem card flex-cc">
+				<div class="hospitalDetails">
+					<ul class="flex-cc col noBullets">
+						<li class="hspNameLi flex-cc">
+							<h4>Pavani Multi Specility  Hospital</h4>
+							<a class="hspDetailsLink" href="https://www.google.com/maps/search/?api=1&amp;query=Pavani Multi Specility  Hospital, 5th Cross Rd, Sai Nagar, Anantapur, Andhra Pradesh 515001, India" title="open in maps" target="-blank" rel="noreferrer noopener">Open in maps</a>
+						</li>
+						<li class="hspChargesLi">Partially Empanelled</li>
+						<li class="hspPhoneLi">
+							<ul class="flex-cc noBullets phoneUl">
+								<li><a href="#">7207266081</a></li>
+								<li class="vertLine"></li>
+								<li><a href="#">7569300279</a></li>
+							</ul>
+						</li>
+						<li class="hspAddressLi">5th Cross Rd, Sai Nagar, Anantapur, Andhra Pradesh 515001, India</li>
+					</ul>
+				</div>
+				<div class="bedData flex-cc col">
+					<ul class="flex-cc noBullets">
+						<li>Without Oxygen</li>
+						<li>With Oxygen</li>
+						<li>ICU</li>
+						<li>ICU with Ventilator</li>
+					</ul>
+					<ul class="flex-cc noBullets">
+						<li><span>11</span>/<span>15</span></li>
+						<li><span>0</span>/<span>15</span></li>
+						<li><span>0</span>/<span>0</span></li>
+						<li><span>0</span>/<span>0</span></li>
+					</ul>
+				</div>
+			</div><div class="hospitalItem card flex-cc">
+				<div class="hospitalDetails">
+					<ul class="flex-cc col noBullets">
+						<li class="hspNameLi flex-cc">
+							<h4>Asha Hospital</h4>
+							<a class="hspDetailsLink" href="https://www.google.com/maps/search/?api=1&amp;query=Asha Hospital, # 7/201, Court Road, Rahamat Nagar, Anantapur, Andhra Pradesh 515001, India" title="open in maps" target="-blank" rel="noreferrer noopener">Open in maps</a>
+						</li>
+						<li class="hspChargesLi">Partially Empanelled</li>
+						<li class="hspPhoneLi">
+							<ul class="flex-cc noBullets phoneUl">
+								<li><a href="#">08554274194</a></li>
+								<li class="vertLine"></li>
+								<li><a href="#">8096002131</a></li>
+							</ul>
+						</li>
+						<li class="hspAddressLi"># 7/201, Court Road, Rahamat Nagar, Anantapur, Andhra Pradesh 515001, India</li>
+					</ul>
+				</div>
+				<div class="bedData flex-cc col">
+					<ul class="flex-cc noBullets">
+						<li>Without Oxygen</li>
+						<li>With Oxygen</li>
+						<li>ICU</li>
+						<li>ICU with Ventilator</li>
+					</ul>
+					<ul class="flex-cc noBullets">
+						<li><span>6</span>/<span>6</span></li>
+						<li><span>6</span>/<span>16</span></li>
+						<li><span>3</span>/<span>8</span></li>
+						<li><span>0</span>/<span>0</span></li>
+					</ul>
+				</div>
+			</div><div class="hospitalItem card flex-cc">
+				<div class="hospitalDetails">
+					<ul class="flex-cc col noBullets">
+						<li class="hspNameLi flex-cc">
+							<h4>Sri Anand Hospital</h4>
+							<a class="hspDetailsLink" href="https://www.google.com/maps/search/?api=1&amp;query=Sri Anand Hospital, Kamalanagar, Anantapur, Andhra Pradesh 515001, India" title="open in maps" target="-blank" rel="noreferrer noopener">Open in maps</a>
+						</li>
+						<li class="hspChargesLi">Partially Empanelled</li>
+						<li class="hspPhoneLi">
+							<ul class="flex-cc noBullets phoneUl">
+								<li><a href="#">0855 4239494</a></li>
+								<li class="vertLine"></li>
+								<li><a href="#">7093931206</a></li>
+							</ul>
+						</li>
+						<li class="hspAddressLi">Kamalanagar, Anantapur, Andhra Pradesh 515001, India</li>
+					</ul>
+				</div>
+				<div class="bedData flex-cc col">
+					<ul class="flex-cc noBullets">
+						<li>Without Oxygen</li>
+						<li>With Oxygen</li>
+						<li>ICU</li>
+						<li>ICU with Ventilator</li>
+					</ul>
+					<ul class="flex-cc noBullets">
+						<li><span>0</span>/<span>0</span></li>
+						<li><span>0</span>/<span>12</span></li>
+						<li><span>0</span>/<span>3</span></li>
+						<li><span>0</span>/<span>0</span></li>
+					</ul>
+				</div>
+			</div><div class="hospitalItem card flex-cc">
+				<div class="hospitalDetails">
+					<ul class="flex-cc col noBullets">
+						<li class="hspNameLi flex-cc">
+							<h4>K.K NURSING HOME</h4>
+							<a class="hspDetailsLink" href="https://www.google.com/maps/search/?api=1&amp;query=K.K NURSING HOME, Old Town, Anantapur, Andhra Pradesh 515001, India" title="open in maps" target="-blank" rel="noreferrer noopener">Open in maps</a>
+						</li>
+						<li class="hspChargesLi">Partially Empanelled</li>
+						<li class="hspPhoneLi">
+							<ul class="flex-cc noBullets phoneUl">
+								<li><a href="#">08554222133</a></li>
+								<li class="vertLine"></li>
+								<li><a href="#">6301583617</a></li>
+							</ul>
+						</li>
+						<li class="hspAddressLi">Old Town, Anantapur, Andhra Pradesh 515001, India</li>
+					</ul>
+				</div>
+				<div class="bedData flex-cc col">
+					<ul class="flex-cc noBullets">
+						<li>Without Oxygen</li>
+						<li>With Oxygen</li>
+						<li>ICU</li>
+						<li>ICU with Ventilator</li>
+					</ul>
+					<ul class="flex-cc noBullets">
+						<li><span>7</span>/<span>9</span></li>
+						<li><span>0</span>/<span>5</span></li>
+						<li><span>0</span>/<span>6</span></li>
+						<li><span>0</span>/<span>0</span></li>
+					</ul>
+				</div>
+			</div><div class="hospitalItem card flex-cc">
+				<div class="hospitalDetails">
+					<ul class="flex-cc col noBullets">
+						<li class="hspNameLi flex-cc">
+							<h4>GGH</h4>
+							<a class="hspDetailsLink" href="https://www.google.com/maps/search/?api=1&amp;query=GGH, Government Hospital Road, near Arvind Colony, Gulzarpet, Anantapur, Andhra Pradesh 515001, India" title="open in maps" target="-blank" rel="noreferrer noopener">Open in maps</a>
+						</li>
+						<li class="hspChargesLi">Government</li>
+						<li class="hspPhoneLi">
+							<ul class="flex-cc noBullets phoneUl">
+								<li><a href="#">085542 75043</a></li>
+								<li class="vertLine"></li>
+								<li><a href="#">9849905852</a></li>
+							</ul>
+						</li>
+						<li class="hspAddressLi">Government Hospital Road, near Arvind Colony, Gulzarpet, Anantapur, Andhra Pradesh 515001, India</li>
+					</ul>
+				</div>
+				<div class="bedData flex-cc col">
+					<ul class="flex-cc noBullets">
+						<li>Without Oxygen</li>
+						<li>With Oxygen</li>
+						<li>ICU</li>
+						<li>ICU with Ventilator</li>
+					</ul>
+					<ul class="flex-cc noBullets">
+						<li><span>0</span>/<span>277</span></li>
+						<li><span>0</span>/<span>322</span></li>
+						<li><span>0</span>/<span>57</span></li>
+						<li><span>0</span>/<span>40</span></li>
+					</ul>
+				</div>
+			</div><div class="hospitalItem card flex-cc">
+				<div class="hospitalDetails">
+					<ul class="flex-cc col noBullets">
+						<li class="hspNameLi flex-cc">
+							<h4>RDT Hospital</h4>
+							<a class="hspDetailsLink" href="https://www.google.com/maps/search/?api=1&amp;query=RDT Hospital, Lenin Nagar, Anantapur, Andhra Pradesh 515002, India" title="open in maps" target="-blank" rel="noreferrer noopener">Open in maps</a>
+						</li>
+						<li class="hspChargesLi">Partially Empanelled</li>
+						<li class="hspPhoneLi">
+							<ul class="flex-cc noBullets phoneUl">
+								<li><a href="#">08559244267</a></li>
+								<li class="vertLine"></li>
+								<li><a href="#">9989441014</a></li>
+							</ul>
+						</li>
+						<li class="hspAddressLi">Lenin Nagar, Anantapur, Andhra Pradesh 515002, India</li>
+					</ul>
+				</div>
+				<div class="bedData flex-cc col">
+					<ul class="flex-cc noBullets">
+						<li>Without Oxygen</li>
+						<li>With Oxygen</li>
+						<li>ICU</li>
+						<li>ICU with Ventilator</li>
+					</ul>
+					<ul class="flex-cc noBullets">
+						<li><span>10</span>/<span>57</span></li>
+						<li><span>16</span>/<span>213</span></li>
+						<li><span>0</span>/<span>7</span></li>
+						<li><span>0</span>/<span>7</span></li>
+					</ul>
+				</div>
+			</div></div>
+                </div>
+            </section>
+
+            <!-- Hospital availability list  -->
+
+            <!------------- Siva ------------------->
+
+            <!------------- Basha ------------------>
+            <section id="vaccCentreTabContainer" class="flex-cc col">
+        
+                <div class="dbgOuter flex-cc">
+                    <label class="dbgCont">
+                        <input type="checkbox" class="dbgCheck" />
+                        Covaxin
+                    </label>
+                    <label class="dbgCont">
+                        <input type="checkbox" class="dbgCheck" />
+                        Covisheld
+                    </label>
+                    <label class="dbgCont">
+                        <input type="checkbox" class="dbgCheck" />
+                        Age 45+
+                    </label>
+                    <label class="dbgCont">
+                        <input type="checkbox" class="dbgCheck" />
+                        Age 18+
+                    </label>
+                    <label class="dbgCont">
+                        <input type="checkbox" class="dbgCheck" />
+                        Paid
+                    </label>
+                    <label class="dbgCont">
+                        <input type="checkbox" class="dbgCheck" />
+                        Free
+                    </label>
+                    <button>Filter</button>
+                </div>
+                <p><strong style="color:red">NOTE:</strong>The slots availability data displayed in the pincode or district
+                    search is provided by the state govt and private hospitals. The total availability slots includes Dose-1
+                    and Dose-2 slots. While we have real-time data, slot availability on CoWin changes rapidly.D1: Dose 1,
+                    D2: Dose 2</p>
+                <p>On-site registration and vaccination services are now available</p>
+        
+                <ul>
+                    <li><a>At all vaccination centers – both Government and Private</a></li>
+                    <li><a>For all people aged 18 years or above.</a></li>
+                    <li><a>For slot availability and timing, please contact the vaccination center directly.</a></li>
+                </ul>
+        
+                <table>
+                    <tr>
+                        <th>HOSPITAL NAME</th>
+                        <th>22 jul 2021</th>
+                        <th>23 jul 2021</th>
+                        <th>24 jul 2021</th>
+                        <th>25 jul 2021</th>
+                        <th>26 jul 2021</th>
+                        <th>27 jul 2021</th>
+                    </tr>
+
+                </tbody>
+            </table>
+            
+            <!-- filters -->
+            <form class="frm_filtr">
+        
+                    <select name="Select Beds" id="Slct_Beds">
+                        <option value="">
+                            Regular Beds
+                        </option>
+                        <option value="">
+                           Oxygen Beds
+                        </option>
+                        <option value="">
+                            ICU Beds
+                        </option>
+                        <option value="">
+                            Ventilator Beds
+                        </option>
+                    </select>                                   
+                        
+                
+                
+                    <select name="Type" id="Hsp_type">
+                        <option value="Private">Private</option>
+                        <option value="Government">Government</option>
+                        <option value="Arogyashree">Arogyashree</option>
+                    </select>
+                <input type="text" placeholder="Hospital Name.." name="search" class="sbt_btn">
+                <button type="submit">Submit</button>
+                
+                <div class="clr_fix"></div>
+            </form>
+           
+            <!-- Hospital availability list  -->
+            <table class="total_hospitals_list">
+                <thead>
+                    <th>Hospitals Name</th>
+                    <th>Regular Beds</th>
+                    <th>Oxygen Beds</th>
+                    <th>ICU Beds</th>
+                    <th>Ventilator Beds</th>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><a href="">Apollo Hospital</a> <br><br>
+                            <div>
+                                <a href="">9876543210</a>
+                                <p>Door No 10, Executive Court, 50-80, Waltair Main Rd, opp. Daspalla, Ram Nagar,
+                                Visakhapatnam, Andhra Pradesh 530002</p>
+                            </div>
+                        </td>
+                        <td>100</td>
+                        <td>30</td>
+                        <td>25</td>
+                        <td>20</td>
+                    </tr>
+                    <tr>
+                        <td><a href="">Apollo Hospital</a> <br><br>
+                            <div>
+                                 <a href="">9876543210</a>
+                                <p>Door No 10, Executive Court, 50-80, Waltair Main Rd, opp. Daspalla, Ram Nagar,
+                                Visakhapatnam, Andhra Pradesh 530002</p>
+                            </div>
+                        </td>
+                        <td>100</td>
+                        <td>30</td>
+                        <td>25</td>
+                        <td>20</td>
+                    </tr>
+                    <tr>
+                        <td><a href="">Apollo Hospital</a> <br><br>
+                            <div>
+                                <a href="">9876543210</a>
+                                <p>Door No 10, Executive Court, 50-80, Waltair Main Rd, opp. Daspalla, Ram Nagar,
+                                Visakhapatnam, Andhra Pradesh 530002</p>
+                            </div>
+                        </td>
+                        <td>100</td>
+                        <td>30</td>
+                        <td>25</td>
+                        <td>20</td>
+                    </tr>
+                    <tr>
+                        <td><a href="">Apollo Hospital</a> <br><br>
+                            <div>
+                             <a href="">9876543210</a>
+                                <p>Door No 10, Executive Court, 50-80, Waltair Main Rd, opp. Daspalla, Ram Nagar,
+                                Visakhapatnam, Andhra Pradesh 530002</p>
+                            </div>
+                        </td>
+                        <td>100</td>
+                        <td>30</td>
+                        <td>25</td>
+                        <td>20</td>
+                    </tr>
+                    <tr>
+                        <td><a href="">Apollo Hospital</a> <br><br>
+                            <div>
+                                 <a href="">9876543210</a>
+                                <p>Door No 10, Executive Court, 50-80, Waltair Main Rd, opp. Daspalla, Ram Nagar,
+                                Visakhapatnam, Andhra Pradesh 530002</p>
+                            </div>
+                        </td>
+                        <td>100</td>
+                        <td>30</td>
+                        <td>25</td>
+                        <td>20</td>
+                    </tr>
+                    <tr>
+                        <td><a href="">Apollo Hospital</a> <br><br>
+                            <div>
+                                 <a href="">9876543210</a>
+                                <p>Door No 10, Executive Court, 50-80, Waltair Main Rd, opp. Daspalla, Ram Nagar,
+                                Visakhapatnam, Andhra Pradesh 530002</p>
+                            </div>
+                        </td>
+                        <td>100</td>
+                        <td>30</td>
+                        <td>25</td>
+                        <td>20</td>
+                    </tr>
+                    <tr>
+                        <td><a href="">Apollo Hospital</a> <br><br>
+                            <div>
+                                <a href="">9876543210</a>
+                                <p>Door No 10, Executive Court, 50-80, Waltair Main Rd, opp. Daspalla, Ram Nagar,
+                                Visakhapatnam, Andhra Pradesh 530002</p>
+                            </div>
+                        </td>
+                        <td>100</td>
+                        <td>30</td>
+                        <td>25</td>
+                        <td>20</td>
+                      
+                    </tr>
+                </table>
+                
+            </section>
+
+        </div>
+    </section>
+
+    <footer class="flex-cc col">
+        <div class="flex-cc">
+            <span class="flex-cc">Made with <i class="fas fa-heart"></i> by Team - United_Coders</span>
+            <nav id="footerNav">
+                <ul class="noBullets flex-cc">
+                    <li>
+                        <a href="#">About us</a>
+                    </li>
+                    <li>
+                        <a href="#">Contact us</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </footer>
+
+</body>
+
+</html>
