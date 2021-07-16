@@ -360,12 +360,33 @@ body>section {
     align-self: stretch;
     text-align: center;
     color: var(--royal-blue-dark);
+    margin: 10px 0;
 }
 
 .resSectHead span {
     display: inline-block;
     padding: 2px 4px;
     color: var(--blue-crayola);
+}
+
+.loadingSpan {
+    margin: 16px 0;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.loadIcon {
+    margin-left: 4px;
+    animation: loading 1000ms ease-in-out infinite;
+}
+
+@keyframes loading {
+    0% {
+        transform: rotate(0);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
 }
 
 

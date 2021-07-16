@@ -122,6 +122,7 @@ function init() {
         // console.log(locateMeBtn.children[0]);
         locateMeBtn.children[0].textContent = "Locating...";
         locateMeBtn.children[1].textContent = "refresh";
+        locateMeBtn.children[1].classList.add("loadIcon");
         locateMe();
         // setSearchbtnStatus();
     });
@@ -294,8 +295,7 @@ function init() {
             return tabBtnEl;
         });
         let sectionEls = fltrArr.map((el, ind) => {
-            let secEl = `<section class="flex-cc col" id="${secElObj[el].elID}">
-            </section>`;
+            let secEl = `<section class="flex-cc col" id="${secElObj[el].elID}"></section>`;
             return secEl;
         });
 
@@ -410,6 +410,7 @@ function locateMe() {
             showInfoMsg("error", msg);
             locateMeBtn.children[0].textContent = "Locate Me";
             locateMeBtn.children[1].textContent = "location_searching";
+            locateMeBtn.children[1].classList.remove("loadIcon");
             locateMeBtn.classList.remove("selected");
         }
     );
@@ -438,6 +439,7 @@ function locateMe() {
         else {
             locateMeBtn.children[0].textContent = "Locate Me";
             locateMeBtn.children[1].textContent = "location_searching";
+            locateMeBtn.children[1].classList.remove("loadIcon");
             locateMeBtn.classList.remove("selected");
 
             console.log(`Sorry! Service only in AP. You are currently in ${distNmReadable}`);
@@ -449,6 +451,7 @@ function locateMe() {
             distName = distConv2[`${distNmReadable}`];
             locateMeBtn.children[0].textContent = distStr;
             locateMeBtn.children[1].textContent = "my_location";
+            locateMeBtn.children[1].classList.remove("loadIcon");
             distSel.selectedIndex = 0;
             distSel.classList.remove("selected");
             // console.log(

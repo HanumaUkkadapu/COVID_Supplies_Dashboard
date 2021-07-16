@@ -64,6 +64,7 @@ function getDate() {
 }
 
 function putVCHeaderData(vcSect, distName) {
+    vcSect.textContent = "";
     // console.log(distName);
     let sectCont = `<h3 class="resSectHead">
     Vaccination Centres - <span>${distName}</span>
@@ -97,6 +98,7 @@ function putVCHeaderData(vcSect, distName) {
         </div>
     </div>
     <div id="vaccCentreData" class="flex-cc col">
+        <span class="flex-cc loadingSpan" >Fetching data<span class="material-icons loadIcon">refresh</span></span>
     </div>
 </div>`;
     vcSect.insertAdjacentHTML("beforeend", sectCont);

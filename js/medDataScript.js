@@ -39,14 +39,17 @@ function filterMedData(msData) {
 }
 
 function putMSHeaderData(msSect, distName) {
-    let h3El = `<h3 class="medStoreHead resSectHead">Medical Stores - <span>${distName}</span></h3>`;
-    let msWrap = `<div class="container"></div>`;
-    msSect.insertAdjacentHTML("beforeend", h3El);
-    msSect.insertAdjacentHTML("beforeend", msWrap);
+    msSect.textContent = "";
+    let sectCont = `<h3 class="medStoreHead resSectHead">Medical Stores - <span>${distName}</span></h3>
+    <div class="container">
+        <span class="flex-cc loadingSpan" >Fetching data<span class="material-icons loadIcon">refresh</span></span>
+    </div>`;
+    msSect.insertAdjacentHTML("beforeend", sectCont);
 }
 
 function loadMDintoDoc(arr) {
     msDataWrap = document.querySelector("#medStoreTabContainer > .container");
+    msDataWrap.textContent = "";
     arr.forEach((el, ind) => {
         let i = ind % imgLinks.length;
         let openLinkInNewTab = ` target="_blank" rel=noreferrer noopener" `;

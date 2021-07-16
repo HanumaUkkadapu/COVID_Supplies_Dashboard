@@ -80,10 +80,12 @@ function filterHspData(hospitalList) {
 }
 
 function putHSPHeaderData(hspSect, distName) {
+    let distName2 = distName == "Visakhapatanam" ? "Visakhapatnam" : distName;
+    hspSect.textContent = "";
     // console.log(distName);
     let sectCont = `<div class="container flex-cc col">
     <h3 class="resSectHead">
-        Hospitals - <span>${distConv[distName]}</span>
+        Hospitals - <span>${distConv[distName2]}</span>
     </h3>
     
     <!-- filters -->
@@ -110,7 +112,7 @@ function putHSPHeaderData(hspSect, distName) {
     </div>
 
     <div id="hospitalData" class="flex-cc col">
-       
+        <span class="flex-cc loadingSpan" >Fetching data<span class="material-icons loadIcon">refresh</span></span>
     </div>
 </div>`;
     hspSect.insertAdjacentHTML("beforeend", sectCont);
@@ -134,9 +136,9 @@ function filterHData(distName, arr) {
     let fltrIndArr, fltrData;
     if (indArr.length > 0) {
         fltrIndArr = indArr.reduce((acc, currEl, currInd) => {
-            if (currInd = 0) acc = currEl;
+            if ((currInd = 0)) acc = currEl;
             else {
-                let arr1 = acc.filter(value => currEl.includes(value));
+                let arr1 = acc.filter((value) => currEl.includes(value));
                 acc = arr1;
             }
             // console.log(acc,currEl);
@@ -187,7 +189,10 @@ function loadHSPDataToDoc(data) {
 
         let hspName = data[i].hospital_name.split(",")[0];
         let address = data[i].hospital_address || data[i].district;
-        let charges = data[i].charges == "Government" || data[i].charges == "Arogyasri" ? "govt" : "private";
+        let charges =
+            data[i].charges == "Government" || data[i].charges == "Arogyasri" ?
+            "govt" :
+            "private";
         let hspItem = `  <div class="hospitalItem card flex-cc">
                             <div class="hospitalDetails">
                                 <ul class="flex-cc col noBullets">
@@ -198,22 +203,12 @@ function loadHSPDataToDoc(data) {
                                             title="open in maps" target="-blank" rel="noreferrer noopener">Open in
                                             maps</a>
                                     </li>
-                                    <li class="hspChargesLi ${charges}">${
-                                        data[i].charges
-                                    }</li>
+                                    <li class="hspChargesLi ${charges}">${data[i].charges}</li>
                                     <li class="hspPhoneLi">
                                         <ul class="flex-cc noBullets phoneUl">
-                                            <li><a href="tel:${
-                                                data[i].hospital_phone
-                                            }">${
-                                                data[i].hospital_phone
-                                            }</a></li>
+                                            <li><a href="tel:${data[i].hospital_phone}">${data[i].hospital_phone}</a></li>
                                             <li class="vertLine"></li>
-                                            <li><a href="tel:${
-                                                data[i].hospital_poc_phone
-                                            }">${
-                                                data[i].hospital_poc_phone
-                                            }</a></li>
+                                            <li><a href="tel:${data[i].hospital_poc_phone}">${data[i].hospital_poc_phone}</a></li>
                                         </ul>
                                     </li>
                                     <li class="hspAddressLi">${address}</li>
@@ -242,28 +237,16 @@ function loadHSPDataToDoc(data) {
                                             Available
                                         </td>
                                         <td class="${availObjct.wo_oxygen}">
-                                            <span>${
-                                                data[i]
-                                                    .available_beds_without_oxygen
-                                            }</span>
+                                            <span>${data[i].available_beds_without_oxygen}</span>
                                         </td>
                                         <td class="${availObjct.w_oxygen}">
-                                            <span>${
-                                                data[i]
-                                                    .available_beds_with_oxygen
-                                            }</span>
+                                            <span>${data[i].available_beds_with_oxygen}</span>
                                         </td>
                                         <td class="${availObjct.wo_ventilator}">
-                                            <span>${
-                                                data[i]
-                                                    .available_icu_beds_without_ventilator
-                                            }</span>
+                                            <span>${data[i].available_icu_beds_without_ventilator}</span>
                                         </td>
                                         <td class="${availObjct.w_ventilator}">
-                                            <span>${
-                                                data[i]
-                                                    .available_icu_beds_with_ventilator
-                                            }</span>
+                                            <span>${data[i].available_icu_beds_with_ventilator}</span>
                                         </td>
                                        </tr>
                                    </tbody>
@@ -272,27 +255,16 @@ function loadHSPDataToDoc(data) {
                                             Total
                                         </td>
                                         <td>
-                                            <span>${
-                                                data[i]
-                                                    .total_beds_without_oxygen
-                                            }</span>
+                                            <span>${data[i].total_beds_without_oxygen}</span>
                                         </td>
                                         <td>
-                                            <span>${
-                                                data[i].total_beds_with_oxygen
-                                            }</span>
+                                            <span>${data[i].total_beds_with_oxygen}</span>
                                         </td>
                                         <td>
-                                            <span>${
-                                                data[i]
-                                                    .total_icu_beds_without_ventilator
-                                            }</span>
+                                            <span>${data[i].total_icu_beds_without_ventilator}</span>
                                         </td>
                                         <td>
-                                            <span>${
-                                                data[i]
-                                                    .total_icu_beds_with_ventilator
-                                            }</span>
+                                            <span>${data[i].total_icu_beds_with_ventilator}</span>
                                         </td>
                                     </tr>
                                 </table>
@@ -311,7 +283,6 @@ function loadHSPDataToDoc(data) {
 }
 
 export function loadHspData(distName) {
-
     console.log(distName);
     distName = distName == "Visakhapatnam" ? "Visakhapatanam" : distName;
     // console.log(distConv[distName]); // display name
