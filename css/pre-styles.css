@@ -294,7 +294,7 @@ table td a .icon {
 
 @media (max-width: 440px) {
     body {
-        font-size: 14px;
+        font-size: 12px;
     }
     .guidelines h2 {
         font-size: 20px;
@@ -308,10 +308,3 @@ table td a .icon {
         font-size: 24px;
     }
 }
-
-
-/* @media (max-width: 360px) {
-    .img_pre {
-        width: 90%;
-    }
-} */
