@@ -116,7 +116,10 @@ function init() {
             checkDisable(btn, targElInd);
         });
         let divEl = carslEl.children[1].children[0];
-        divEl.children[targElInd].scrollIntoView();
+        divEl.children[targElInd].scrollIntoView({
+            block: "end",
+            inline: "nearest",
+        });
     }
 
     function checkDisable(btn, targElInd) {

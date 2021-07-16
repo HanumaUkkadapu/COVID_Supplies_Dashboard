@@ -375,9 +375,11 @@ function init() {
         contactDiv.classList.add("open");
         body.classList.add("menu-open");
     });
-    closeCFBtn.addEventListener("click", () => {
+    closeCFBtn.addEventListener("click", (e) => {
+        e.preventDefault();
         contactDiv.classList.remove("open");
         body.classList.remove("menu-open");
+        showCFBtn.focus();
     });
     contactForm.addEventListener("submit", (e) => {
         e.preventDefault();
