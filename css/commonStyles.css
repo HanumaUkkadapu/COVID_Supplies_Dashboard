@@ -334,7 +334,7 @@ nav ul li>button:focus {
 
 #aboutUsDiv.open,
 #contactDiv.open {
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgba(0, 0, 0, 0.7);
     transform: scale(1) translateY(0);
 }
 

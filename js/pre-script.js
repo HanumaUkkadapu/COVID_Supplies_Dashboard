@@ -7,6 +7,10 @@ let root,
     langsel,
     eng_div,
     tel_div,
+    engCarousel,
+    telCarousel,
+    navCarsBtns,
+    closeCarslBtns,
     showAUBtn,
     aboutUsDiv,
     closeAUBtn,
@@ -65,6 +69,101 @@ function init() {
             tel_div.style.display = "flex";
         }
     });
+    // console.log(eng_div.childElementCount);
+    // console.log(tel_div.childElementCount);
+    [eng_div, tel_div].forEach((el) => {
+        [...el.children].forEach((imgPre) => {
+            imgPre.addEventListener("click", (e) => {
+                let targEl = e.target;
+                if (targEl.tagName == "IMG") {
+                    if (targEl.parentElement.tagName == "PICTURE") {
+                        targEl = e.target.parentElement.parentElement;
+                    } else targEl = e.target.parentElement;
+                }
+                // console.log(el.classList[1], targEl.dataset.ind);
+                openCarousel(el.classList[1], targEl.dataset.ind);
+            });
+        });
+    });
+
+    engCarousel = document.getElementById("carousel_eng");
+    telCarousel = document.getElementById("carousel_tel");
+    navCarsBtns = document.querySelectorAll(".carouselSect .cNavLink");
+    closeCarslBtns = document.querySelectorAll(".closeCarouselBtn");
+
+    navCarsBtns.forEach((btn) => {
+        btn.addEventListener("click", (e) => {
+            // console.log(btn.parentElement.id, btn.dataset.currelid, typeof btn.dataset.currelid);
+            moveCarousel(btn.parentElement.id, btn, btn.dataset.currelid);
+        });
+    });
+
+    closeCarslBtns.forEach((btn) => {
+        btn.addEventListener("click", () => {
+            // console.log(btn.dataset.targetid);
+            closeCarousel(btn.dataset.targetid);
+        });
+    });
+
+    function openCarousel(elClsName, targElInd) {
+        let carsID = `carousel_${elClsName.split("_")[0]}`;
+        // console.log(carsID);
+        let carslEl = document.getElementById(carsID);
+        carslEl.classList.add("open");
+        body.classList.add("menu-open");
+        document.querySelectorAll(`#${carsID} .cNavLink`).forEach((btn) => {
+            btn.dataset.currelid = targElInd;
+            checkDisable(btn, targElInd);
+        });
+        let divEl = carslEl.children[1].children[0];
+        divEl.children[targElInd].scrollIntoView();
+    }
+
+    function checkDisable(btn, targElInd) {
+        if (btn.classList[2] == "prevItemLink" && targElInd == 0)
+            btn.disabled = true;
+        else if (btn.classList[2] == "nextItemLink" && targElInd == 11)
+            btn.disabled = true;
+        else btn.disabled = false;
+    }
+
+    function moveCarousel(parentID, btn, currElID) {
+        let btnType = btn.classList[2],
+            imgWrapChildDiv,
+            targetElID;
+        // console.log(btnType, currElID);
+        if (btnType == "prevItemLink") {
+            imgWrapChildDiv = btn.nextElementSibling.children[0];
+            if (currElID != 0) {
+                targetElID = Number(currElID) - 1;
+                imgWrapChildDiv.children[targetElID].scrollIntoView();
+                setNewTargID(targetElID);
+            }
+        } else if (btnType == "nextItemLink") {
+            imgWrapChildDiv = btn.previousElementSibling.children[0];
+            if (currElID != imgWrapChildDiv.childElementCount - 1) {
+                targetElID = Number(currElID) + 1;
+                imgWrapChildDiv.children[targetElID].scrollIntoView();
+                setNewTargID(targetElID);
+            }
+        }
+
+        function setNewTargID(newTargID) {
+            document
+                .querySelectorAll(`#${parentID} .cNavLink`)
+                .forEach((btn) => {
+                    btn.dataset.currelid = newTargID;
+                    checkDisable(btn, newTargID);
+                });
+        }
+    }
+
+    function closeCarousel(carsID) {
+        // console.log(carsID);
+        let carslEl = document.getElementById(carsID);
+        carslEl.classList.remove("open");
+        body.classList.remove("menu-open");
+    }
 
     showAUBtn = document.getElementById("showAUBtn");
     aboutUsDiv = document.getElementById("aboutUsDiv");
@@ -82,7 +181,6 @@ function init() {
         aboutUsDiv.classList.remove("open");
         body.classList.remove("menu-open");
     });
-
 
     showCFBtn.addEventListener("click", () => {
         contactDiv.classList.add("open");
