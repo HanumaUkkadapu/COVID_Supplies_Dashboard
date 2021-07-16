@@ -152,7 +152,6 @@ table td a .icon {
 .imgWrapper>div .img_wrap {
     max-height: calc( 100vh - 32px);
     width: calc( 100vw - 160px);
-    margin-right: 80px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -276,7 +275,6 @@ table td a .icon {
     }
     .imgWrapper>div .img_wrap {
         width: calc( 100vw - 100px);
-        margin-right: 80px;
     }
     .imgWrapper>div .img_wrap img {
         max-width: calc( 100vw - 100px);
