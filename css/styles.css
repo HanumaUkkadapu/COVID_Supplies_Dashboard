@@ -755,7 +755,7 @@ a.hspDetailsLink:hover {
 }
 
 .vaccCentreItem {
-    margin: 4px 0;
+    margin: 6px 0;
     padding: 0;
     background: #fff;
     flex-flow: row nowrap;
@@ -798,11 +798,11 @@ li.vcNameLi h4 {
     font-size: 22px;
 }
 
-li.vcChargesLi {
+li.vcTagsLi {
     margin-bottom: 6px;
 }
 
-li.vcChargesLi span {
+li.vcTagsLi span {
     display: inline-block;
     background-color: rgba(0, 120, 255, 0.2);
     margin: 2px;
@@ -811,51 +811,30 @@ li.vcChargesLi span {
     text-align: center;
 }
 
-li.vcChargesLi span:first-child {
+li.vcTagsLi span:first-child {
     margin-left: 0;
     text-align: center;
 }
 
-li.vcChargesLi span:last-child {
+li.vcTagsLi span:last-child {
     margin-right: 0;
 }
 
-li.vcChargesLi span.Paid {
-    background-color: #f28f3b;
+li.vcTagsLi span.Paid {
+    background-color: #ffb97b;
+    /*#f28f3b;*/
 }
 
-li.vcChargesLi span.Free {
+li.vcTagsLi span.Free {
     background-color: #80ed99;
 }
 
-li.vcChargesLi span.vacc {
+li.vcTagsLi span.vacc {
     background-color: #48cae4;
 }
 
-li.vcChargesLi span.age {
+li.vcTagsLi span.age {
     background-color: #cebeff;
-}
-
-li.vcPhoneLi .phoneUl {
-    align-items: stretch;
-}
-
-li.vcPhoneLi .phoneUl li {
-    margin: 0 8px;
-}
-
-li.vcPhoneLi .phoneUl li:first-child {
-    margin-left: 0px;
-}
-
-li.vcPhoneLi .phoneUl li.vertLine {
-    margin: 0;
-    width: 1px;
-    background: #222;
-}
-
-li.vcPhoneLi .phoneUl li:last-child {
-    margin-right: 0;
 }
 
 li.vcAddressLi {
@@ -927,8 +906,7 @@ li.vcAddressLi {
         font-size: 20px;
     }
     .filters,
-    li.vcChargesLi,
-    li.vcPhoneLi .phoneUl li,
+    li.vcTagsLi,
     .vaccDataTable {
         font-size: 14px;
     }
@@ -1152,6 +1130,10 @@ li.vcAddressLi {
     }
     .storecontainerR div a {
         padding: 6px 12px;
+    }
+    /****************************/
+    .vcTagsLi span {
+        font-size: 12px;
     }
 }
 

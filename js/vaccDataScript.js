@@ -67,7 +67,7 @@ function putVCHeaderData(vcSect, distName) {
     vcSect.textContent = "";
     // console.log(distName);
     let sectCont = `<h3 class="resSectHead">
-    Vaccination Centres - <span>${distName}</span>
+    Vaccination Centres - <span>${distName}</span> - slots on ${todayDate}
 </h3>
 
 <div id="vaccCentreTabWrapper">
@@ -105,7 +105,6 @@ function putVCHeaderData(vcSect, distName) {
 }
 
 function filterVCData(vcData) {
-
     vaccCentreData = [];
     let historyIDs = [],
         centID,
@@ -129,24 +128,43 @@ function filterVCData(vcData) {
             name: "",
             address: "",
             fee_type: "",
-            fee: 0,
-            vaccine_data: new sampleTblData(),
+            vaccine_data: {},
         };
         arr.forEach((dObj) => {
             vcdFullObj.center_id = dObj.center_id;
             vcdFullObj.name = dObj.name;
             vcdFullObj.address = `${dObj.address}, ${dObj.district_name}, ${dObj.state_name} - ${dObj.pincode}`;
             vcdFullObj.fee_type = dObj.fee_type;
-            vcdFullObj.fee = dObj.fee;
 
+
+            if (vcdFullObj.vaccine_data[dObj.vaccine] == undefined) {
+                vcdFullObj.vaccine_data[dObj.vaccine] = {};
+            }
+            // console.log(dObj.min_age_limit, dObj.vaccine);
             if (dObj.min_age_limit == 45) {
                 // console.log(dObj.available_capacity_dose1);
+                if (
+                    vcdFullObj.vaccine_data[dObj.vaccine].age45plus == undefined
+                ) {
+                    vcdFullObj.vaccine_data[dObj.vaccine].age45plus = {
+                        d1: 0,
+                        d2: 0,
+                    };
+                }
                 vcdFullObj.vaccine_data[dObj.vaccine].age45plus.d1 =
                     dObj.available_capacity_dose1;
                 vcdFullObj.vaccine_data[dObj.vaccine].age45plus.d2 =
                     dObj.available_capacity_dose2;
             } else if (dObj.min_age_limit == 18 && dObj.max_age_limit == 44) {
                 // console.log(dObj.available_capacity_dose1);
+                if (
+                    vcdFullObj.vaccine_data[dObj.vaccine].age18to44 == undefined
+                ) {
+                    vcdFullObj.vaccine_data[dObj.vaccine].age18to44 = {
+                        d1: 0,
+                        d2: 0,
+                    };
+                }
                 vcdFullObj.vaccine_data[dObj.vaccine].age18to44.d1 =
                     dObj.available_capacity_dose1;
                 vcdFullObj.vaccine_data[dObj.vaccine].age18to44.d2 =
@@ -156,15 +174,69 @@ function filterVCData(vcData) {
                 dObj.max_age_limit == undefined
             ) {
                 // console.log(dObj.available_capacity_dose1);
+
+                if (
+                    vcdFullObj.vaccine_data[dObj.vaccine].age18plus == undefined
+                ) {
+                    vcdFullObj.vaccine_data[dObj.vaccine].age18plus = {
+                        d1: 0,
+                        d2: 0,
+                    };
+                }
                 vcdFullObj.vaccine_data[dObj.vaccine].age18plus.d1 =
                     dObj.available_capacity_dose1;
                 vcdFullObj.vaccine_data[dObj.vaccine].age18plus.d2 =
                     dObj.available_capacity_dose2;
             }
+            vcdFullObj.vaccine_data[dObj.vaccine].fee = dObj.fee;
+            // console.log(dObj.min_age_limit, vcdFullObj.vaccine_data);
         });
-        // console.log(vcdFullObj);
+        // console.log(arr.length, vcdFullObj.vaccine_data);
+        // console.log(Object.keys(vcdFullObj.vaccine_data));
         vaccCentreData.push(vcdFullObj);
     }
+    // function getOneObj(arr) {
+    //     let vcdFullObj = {
+    //         center_id: 0,
+    //         name: "",
+    //         address: "",
+    //         fee_type: "",
+    //         fee: 0,
+    //         vaccine_data: new sampleTblData(),
+    //     };
+    //     arr.forEach((dObj) => {
+    //         vcdFullObj.center_id = dObj.center_id;
+    //         vcdFullObj.name = dObj.name;
+    //         vcdFullObj.address = `${dObj.address}, ${dObj.district_name}, ${dObj.state_name} - ${dObj.pincode}`;
+    //         vcdFullObj.fee_type = dObj.fee_type;
+    //         vcdFullObj.fee = dObj.fee;
+
+    //         if (dObj.min_age_limit == 45) {
+    //             // console.log(dObj.available_capacity_dose1);
+    //             vcdFullObj.vaccine_data[dObj.vaccine].age45plus.d1 =
+    //                 dObj.available_capacity_dose1;
+    //             vcdFullObj.vaccine_data[dObj.vaccine].age45plus.d2 =
+    //                 dObj.available_capacity_dose2;
+    //         } else if (dObj.min_age_limit == 18 && dObj.max_age_limit == 44) {
+    //             // console.log(dObj.available_capacity_dose1);
+    //             vcdFullObj.vaccine_data[dObj.vaccine].age18to44.d1 =
+    //                 dObj.available_capacity_dose1;
+    //             vcdFullObj.vaccine_data[dObj.vaccine].age18to44.d2 =
+    //                 dObj.available_capacity_dose2;
+    //         } else if (
+    //             dObj.min_age_limit == 18 &&
+    //             dObj.max_age_limit == undefined
+    //         ) {
+    //             // console.log(dObj.available_capacity_dose1);
+    //             vcdFullObj.vaccine_data[dObj.vaccine].age18plus.d1 =
+    //                 dObj.available_capacity_dose1;
+    //             vcdFullObj.vaccine_data[dObj.vaccine].age18plus.d2 =
+    //                 dObj.available_capacity_dose2;
+    //         }
+    //     });
+    //     // console.log(vcdFullObj);
+    //     vaccCentreData.push(vcdFullObj);
+    // }
     // console.log(vcData);
 
     vcData.forEach((e) => {
@@ -235,49 +307,52 @@ function loadFilteredVCData(dataArr) {
 
     dataArr.forEach((dObj) => {
         let vcDObj = dObj.vaccine_data;
+
+        // function replaceUndefinedOrNull(key, value) {
+        //     if (value === "NA") {
+        //         return undefined;
+        //     }
+        //     return value;
+        // }
+        // fltrVcDObj = JSON.stringify(fltrVcDObj, replaceUndefinedOrNull);
+        // fltrVcDObj = JSON.parse(fltrVcDObj);
+        // function removeEmpty(obj) {
+        //     const newObj = {};
+        //     Object.entries(obj).forEach(([k, v]) => {
+        //         console.log(k);
+        //         console.log(v);
+        //         if (v === Object(v)) {
+        //             newObj[k] = removeEmpty(v);
+        //         } else if (v != "NA") {
+        //             newObj[k] = obj[k];
+        //         }
+        //     });
+        //     return newObj;
+        // }
+        // fltrVcDObj = removeEmpty(fltrVcDObj);
+        // console.log(vcDObj);
+        // console.log(fltrVcDObj);
         // console.log(dObj.name, dObj.center_id, vcDObj);
         // console.log(dObj.center_id, vcDObj);
+
         let vcN = [],
-            vcA = [];
+            vcA = [],
+            vA = Object.keys(vcDObj),
+            vA2 = [];
         (() => {
-            let vA = [],
-                vA2 = [];
-            ["COVAXIN", "COVISHIELD", "SPUTNIK V"].forEach((vN) => {
-                if (
-                    vcDObj[vN].age18plus.d1 != "NA" ||
-                    vcDObj[vN].age18plus.d2 != "NA" ||
-                    vcDObj[vN].age18to44.d1 != "NA" ||
-                    vcDObj[vN].age18to44.d2 != "NA" ||
-                    vcDObj[vN].age45plus.d1 != "NA" ||
-                    vcDObj[vN].age45plus.d2 != "NA"
-                )
-                    vA.push(vN);
-                if (
-                    vcDObj[vN].age18plus.d1 != "NA" ||
-                    vcDObj[vN].age18plus.d2 != "NA"
-                ) {
-                    if (vA2.indexOf("Age 18+") == -1) {
-                        vA2.push("Age 18+");
+            vA.forEach((vN) => {
+                let vNAgeKeys = Object.keys(vcDObj[vN]);
+                vNAgeKeys.forEach((vAge) => {
+                    if (vAge == "age18plus") {
+                        if (vA2.indexOf("Age 18+") == -1) vA2.push("Age 18+");
+                    } else if (vAge == "age18to44") {
+                        if (vA2.indexOf("Age 18-44") == -1)
+                            vA2.push("Age 18-44");
+                    } else if (vAge == "age45plus") {
+                        if (vA2.indexOf("Age 45+") == -1) vA2.push("Age 45+");
                     }
-                }
-                if (
-                    vcDObj[vN].age18to44.d1 != "NA" ||
-                    vcDObj[vN].age18to44.d2 != "NA"
-                ) {
-                    if (vA2.indexOf("Age 18-44") == -1) {
-                        vA2.push("Age 18-44");
-                    }
-                }
-                if (
-                    vcDObj[vN].age45plus.d1 != "NA" ||
-                    vcDObj[vN].age45plus.d2 != "NA"
-                ) {
-                    if (vA2.indexOf("Age 45+") == -1) {
-                        vA2.push("Age 45+");
-                    }
-                }
+                });
             });
-            // console.log(vA,vA2);
             vA.forEach((v) => {
                 let el = `<span class="vacc">${v}</span>`;
                 vcN.push(el);
@@ -287,121 +362,97 @@ function loadFilteredVCData(dataArr) {
                 vcA.push(el);
             });
         })();
+        // console.log(vA, vA2);
 
         /***************************** Getting Classes ***************************************/
 
-        let vcICls = new sampleTblData();
+        let vcICls = JSON.parse(JSON.stringify(vcDObj));
 
         (() => {
-            vcICls.COVAXIN.age18plus.d1 =
-                vcDObj.COVAXIN.age18plus.d1 > 0 ?
-                "vc_avlbl" :
-                vcDObj.COVAXIN.age18plus.d1 == "NA" ?
-                "vc_na" :
-                "vc_bkd";
-            vcICls.COVAXIN.age18plus.d2 =
-                vcDObj.COVAXIN.age18plus.d2 > 0 ?
-                "vc_avlbl" :
-                vcDObj.COVAXIN.age18plus.d2 == "NA" ?
-                "vc_na" :
-                "vc_bkd";
-            vcICls.COVAXIN.age18to44.d1 =
-                vcDObj.COVAXIN.age18to44.d1 > 0 ?
-                "vc_avlbl" :
-                vcDObj.COVAXIN.age18to44.d1 == "NA" ?
-                "vc_na" :
-                "vc_bkd";
-            vcICls.COVAXIN.age18to44.d2 =
-                vcDObj.COVAXIN.age18to44.d2 > 0 ?
-                "vc_avlbl" :
-                vcDObj.COVAXIN.age18to44.d2 == "NA" ?
-                "vc_na" :
-                "vc_bkd";
-            vcICls.COVAXIN.age45plus.d1 =
-                vcDObj.COVAXIN.age45plus.d1 > 0 ?
-                "vc_avlbl" :
-                vcDObj.COVAXIN.age45plus.d1 == "NA" ?
-                "vc_na" :
-                "vc_bkd";
-            vcICls.COVAXIN.age45plus.d2 =
-                vcDObj.COVAXIN.age45plus.d2 > 0 ?
-                "vc_avlbl" :
-                vcDObj.COVAXIN.age45plus.d2 == "NA" ?
-                "vc_na" :
-                "vc_bkd";
-            vcICls.COVISHIELD.age18plus.d1 =
-                vcDObj.COVISHIELD.age18plus.d1 > 0 ?
-                "vc_avlbl" :
-                vcDObj.COVISHIELD.age18plus.d1 == "NA" ?
-                "vc_na" :
-                "vc_bkd";
-            vcICls.COVISHIELD.age18plus.d2 =
-                vcDObj.COVISHIELD.age18plus.d2 > 0 ?
-                "vc_avlbl" :
-                vcDObj.COVISHIELD.age18plus.d2 == "NA" ?
-                "vc_na" :
-                "vc_bkd";
-            vcICls.COVISHIELD.age18to44.d1 =
-                vcDObj.COVISHIELD.age18to44.d1 > 0 ?
-                "vc_avlbl" :
-                vcDObj.COVISHIELD.age18to44.d1 == "NA" ?
-                "vc_na" :
-                "vc_bkd";
-            vcICls.COVISHIELD.age18to44.d2 =
-                vcDObj.COVISHIELD.age18to44.d2 > 0 ?
-                "vc_avlbl" :
-                vcDObj.COVISHIELD.age18to44.d2 == "NA" ?
-                "vc_na" :
-                "vc_bkd";
-            vcICls.COVISHIELD.age45plus.d1 =
-                vcDObj.COVISHIELD.age45plus.d1 > 0 ?
-                "vc_avlbl" :
-                vcDObj.COVISHIELD.age45plus.d1 == "NA" ?
-                "vc_na" :
-                "vc_bkd";
-            vcICls.COVISHIELD.age45plus.d2 =
-                vcDObj.COVISHIELD.age45plus.d2 > 0 ?
-                "vc_avlbl" :
-                vcDObj.COVISHIELD.age45plus.d2 == "NA" ?
-                "vc_na" :
-                "vc_bkd";
-            vcICls["SPUTNIK V"].age18plus.d1 =
-                vcDObj["SPUTNIK V"].age18plus.d1 > 0 ?
-                "vc_avlbl" :
-                vcDObj["SPUTNIK V"].age18plus.d1 == "NA" ?
-                "vc_na" :
-                "vc_bkd";
-            vcICls["SPUTNIK V"].age18plus.d2 =
-                vcDObj["SPUTNIK V"].age18plus.d2 > 0 ?
-                "vc_avlbl" :
-                vcDObj["SPUTNIK V"].age18plus.d2 == "NA" ?
-                "vc_na" :
-                "vc_bkd";
-            vcICls["SPUTNIK V"].age18to44.d1 =
-                vcDObj["SPUTNIK V"].age18to44.d1 > 0 ?
-                "vc_avlbl" :
-                vcDObj["SPUTNIK V"].age18to44.d1 == "NA" ?
-                "vc_na" :
-                "vc_bkd";
-            vcICls["SPUTNIK V"].age18to44.d2 =
-                vcDObj["SPUTNIK V"].age18to44.d2 > 0 ?
-                "vc_avlbl" :
-                vcDObj["SPUTNIK V"].age18to44.d2 == "NA" ?
-                "vc_na" :
-                "vc_bkd";
-            vcICls["SPUTNIK V"].age45plus.d1 =
-                vcDObj["SPUTNIK V"].age45plus.d1 > 0 ?
-                "vc_avlbl" :
-                vcDObj["SPUTNIK V"].age45plus.d1 == "NA" ?
-                "vc_na" :
-                "vc_bkd";
-            vcICls["SPUTNIK V"].age45plus.d2 =
-                vcDObj["SPUTNIK V"].age45plus.d2 > 0 ?
-                "vc_avlbl" :
-                vcDObj["SPUTNIK V"].age45plus.d2 == "NA" ?
-                "vc_na" :
-                "vc_bkd";
+            vA.forEach((vN) => {
+                let vNAgeKeys = Object.keys(vcICls[vN]);
+                vNAgeKeys.forEach((vAge) => {
+                    if (vAge != "fee") {
+                        vcICls[vN][vAge].d1 =
+                            vcICls[vN][vAge].d1 > 0 ?
+                            "vc_avlbl" :
+                            vcICls[vN][vAge].d1 == "NA" ?
+                            "vc_na" :
+                            "vc_bkd";
+                        vcICls[vN][vAge].d2 =
+                            vcICls[vN][vAge].d2 > 0 ?
+                            "vc_avlbl" :
+                            vcICls[vN][vAge].d2 == "NA" ?
+                            "vc_na" :
+                            "vc_bkd";
+                    }
+                });
+            });
         })();
+
+        // console.log(vcICls);
+
+        let fltrVcDObj = JSON.parse(JSON.stringify(vcDObj));
+        let tFees = [],
+            trClasses = {},
+            trhConts = {
+                age18plus: "18 &amp; above",
+                age18to44: "18 - 44 only",
+                age45plus: "45 &amp; above",
+            },
+            tdD1Els = [],
+            tdD2Els = [],
+            thEls = [],
+            trELs = [];
+        Object.keys(fltrVcDObj).forEach((vN) => {
+            thEls.push(`<th>${vN}</th>`);
+            let tFee = `<span class="${dObj.fee_type}">${vN}: ₹${fltrVcDObj[vN].fee}</span>`;
+            tFees.push(tFee);
+            Object.keys(fltrVcDObj[vN]).forEach((vAge) => {
+                if (vAge != "fee") {
+                    if (trClasses[vAge] == undefined) {
+                        trClasses[vAge] = vAge == "age18plus" ? "wrap18" : vAge == "age18to44" ? "wrap18to44" : "wrap45";
+                    }
+                    if (trhConts[vAge] == undefined) {
+                        trhConts[vAge] = vAge == "age18plus" ? "18 &amp; above" : vAge == "age18to44" ? "18 - 44 only" : "45 &amp; above";
+                    }
+
+                    if (tdD1Els[vN] == undefined) tdD1Els[vN] = [];
+                    if (tdD2Els[vN] == undefined) tdD2Els[vN] = [];
+                    if (tdD1Els[vN][vAge] == undefined) tdD1Els[vN][vAge] = [];
+                    if (tdD2Els[vN][vAge] == undefined) tdD2Els[vN][vAge] = [];
+
+                    let tdD1El = `<td>
+                            <span class="${vcICls[vN][vAge].d1}">${fltrVcDObj[vN][vAge].d1}</span>
+                        </td>`;
+                    let tdD2El = `<td>
+                        <span class="${vcICls[vN][vAge].d2}">${fltrVcDObj[vN][vAge].d2}</span>
+                    </td>`;
+                    tdD1Els[vN][vAge].push(tdD1El);
+                    tdD2Els[vN][vAge].push(tdD2El);
+                }
+            });
+        });
+
+        Object.keys(trClasses).forEach((vAge) => {
+            let trIns1 = [],
+                trIns2 = [];
+            let trF = `<tr class="${trClasses[vAge]}">
+            <th rowspan="2">${trhConts[vAge]}</th><td>D1</td>`;
+            let trS = `<tr class="${trClasses[vAge]}"><td>D2</td>`;
+            Object.keys(fltrVcDObj).forEach((vN) => {
+                let trEl1 = `${tdD1Els[vN][vAge]}`;
+                let trEl2 = `${tdD2Els[vN][vAge]}`;
+                trIns1.push(trEl1);
+                trIns2.push(trEl2);
+            });
+            let trVF = trIns1.join('');
+            let trVS = trIns2.join('');
+            let trElF1 = `${trF}${trVF}</tr>`;
+            let trElF2 = `${trS}${trVS}</tr>`;
+            trELs.push(trElF1);
+            trELs.push(trElF2);
+        });
 
         /*************************************************************************************/
 
@@ -411,10 +462,13 @@ function loadFilteredVCData(dataArr) {
             <li class="vcNameLi flex-cc">
                 <h4>${dObj.name}</h4>
             </li>
-            <li class="vcChargesLi">
+            <li class="vcTagsLi">
                 <span class="${dObj.fee_type}">${
-            dObj.fee_type
-        }</span>${vcN.join("")}${vcA.join("")}
+                dObj.fee_type
+            }</span>${vcN.join("")}${vcA.join("")}
+            </li>
+            <li class="vcTagsLi vcFeesLi">
+                Fee: ${tFees.join(' ')}
             </li>
             <li class="vcAddressLi">${dObj.address}</li>
         </ul>
@@ -422,124 +476,14 @@ function loadFilteredVCData(dataArr) {
     <div class="vaccData flex-cc col">
         <table class="vaccDataTable">
             <thead>
-                <tr><th>Age Grp.</th>
-                <th>DOSE</th>
-                <th>COVAXIN</th>
-                <th>COVISHIELD</th>
-                <th>SPUTNIK V</th>
-            </tr></thead>
+                <tr>
+                    <th>Age Grp.</th>
+                    <th>DOSE</th>
+                    ${thEls.join('')}
+                </tr>
+            </thead>
             <tbody>
-                <tr class="wrap18">
-                    <th rowspan="2">18 &amp; above</th>
-                    <td>D1</td>
-                    <td>
-                        <span class="${vcICls.COVAXIN.age18plus.d1}">${
-            vcDObj.COVAXIN.age18plus.d1
-        }</span>
-                    </td>
-                    <td>
-                        <span class="${vcICls.COVISHIELD.age18plus.d1}">${
-            vcDObj.COVISHIELD.age18plus.d1
-        }</span>
-                    </td>
-                    <td>
-                        <span class="${vcICls["SPUTNIK V"].age18plus.d1}">${
-            vcDObj["SPUTNIK V"].age18plus.d1
-        }</span>
-                    </td>
-                </tr>
-                <tr class="wrap18">
-                    <td>D2</td>
-                    <td>
-                        <span class="${vcICls.COVAXIN.age18plus.d2}">${
-            vcDObj.COVAXIN.age18plus.d2
-        }</span>
-                    </td>
-                    <td>
-                        <span class="${vcICls.COVISHIELD.age18plus.d2}">${
-            vcDObj.COVISHIELD.age18plus.d2
-        }</span>
-                    </td>
-                    <td>
-                        <span class="${vcICls["SPUTNIK V"].age18plus.d2}">${
-            vcDObj["SPUTNIK V"].age18plus.d2
-        }</span>
-                    </td>
-                </tr>
-                <tr class="wrap18to44">
-                    <th rowspan="2">18 - 44</th>
-                    <td>D1</td>
-                    <td>
-                        <span class="${vcICls.COVAXIN.age18to44.d1}">${
-            vcDObj.COVAXIN.age18to44.d1
-        }</span>
-                    </td>
-                    <td>
-                        <span class="${vcICls.COVISHIELD.age18to44.d1}">${
-            vcDObj.COVISHIELD.age18to44.d1
-        }</span>
-                    </td>
-                    <td>
-                        <span class="${vcICls["SPUTNIK V"].age18to44.d1}">${
-            vcDObj["SPUTNIK V"].age18to44.d1
-        }</span>
-                    </td>
-                </tr>
-                <tr class="wrap18t044">
-                    <td>D2</td>
-                    <td>
-                        <span class="${vcICls.COVAXIN.age18to44.d2}">${
-            vcDObj.COVAXIN.age18to44.d2
-        }</span>
-                    </td>
-                    <td>
-                        <span class="${vcICls.COVISHIELD.age18to44.d2}">${
-            vcDObj.COVISHIELD.age18to44.d2
-        }</span>
-                    </td>
-                    <td>
-                        <span class="${vcICls["SPUTNIK V"].age18to44.d2}">${
-            vcDObj["SPUTNIK V"].age18to44.d2
-        }</span>
-                    </td>
-                </tr>
-                <tr class="wrap45">
-                    <th rowspan="2">45 &amp; above</th>
-                    <td>D1</td>
-                    <td>
-                        <span class="${vcICls.COVAXIN.age45plus.d1}">${
-            vcDObj.COVAXIN.age45plus.d1
-        }</span>
-                    </td>
-                    <td>
-                        <span class="${vcICls.COVISHIELD.age45plus.d1}">${
-            vcDObj.COVISHIELD.age45plus.d1
-        }</span>
-                    </td>
-                    <td>
-                        <span class="${vcICls["SPUTNIK V"].age45plus.d1}">${
-            vcDObj["SPUTNIK V"].age45plus.d1
-        }</span>
-                    </td>
-                </tr>
-                <tr class="wrap45">
-                    <td>D2</td>
-                    <td>
-                        <span class="${vcICls.COVAXIN.age45plus.d2}">${
-            vcDObj.COVAXIN.age45plus.d2
-        }</span>
-                    </td>
-                    <td>
-                        <span class="${vcICls.COVISHIELD.age45plus.d2}">${
-            vcDObj.COVISHIELD.age45plus.d2
-        }</span>
-                    </td>
-                    <td>
-                        <span class="${vcICls["SPUTNIK V"].age45plus.d2}">${
-            vcDObj["SPUTNIK V"].age45plus.d2
-        }</span>
-                    </td>
-                </tr>
+                ${trELs.join("")}
             </tbody>
         </table>
     </div>
@@ -560,6 +504,8 @@ export function loadVaccCentreData(distName) {
 
     console.log(distName);
     // console.log(distConv[distName]); // display name
+
+    [distID, todayDate] = [getDistID(distName), getDate()];
 
     vaccCentreSect = document.getElementById("vaccCentreTabContainer");
     putVCHeaderData(vaccCentreSect, distConv[distName]);
@@ -594,8 +540,6 @@ export function loadVaccCentreData(distName) {
         });
         vaccFilterBtn.click();
     });
-
-    [distID, todayDate] = [getDistID(distName), getDate()];
 
     let vaccURL = `https://cdn-api.co-vin.in/api/v2/appointment/sessions/public/findByDistrict?district_id=${distID}&date=${todayDate}`;
 
